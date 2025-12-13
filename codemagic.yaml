@@ -4,18 +4,10 @@ workflows:
     max_build_duration: 60
     environment:
       vars:
-        KEYSTORE_BASE64:
-          value: "<BASE64_KEYSTORE_PLACEHOLDER>"
-          secure: true
-        KEYSTORE_PASSWORD:
-          value: "<KEYSTORE_PASSWORD>"
-          secure: true
-        KEY_ALIAS:
-          value: "<KEY_ALIAS>"
-          secure: true
-        KEY_PASSWORD:
-          value: "<KEY_PASSWORD>"
-          secure: true
+        KEYSTORE_BASE64: REPLACE_WITH_BASE64_KEYSTORE
+        KEYSTORE_PASSWORD: REPLACE_WITH_KEYSTORE_PASSWORD
+        KEY_ALIAS: REPLACE_WITH_KEY_ALIAS
+        KEY_PASSWORD: REPLACE_WITH_KEY_PASSWORD
     scripts:
       - name: Prepare
         script: |
