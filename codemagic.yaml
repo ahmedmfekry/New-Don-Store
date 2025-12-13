@@ -11,12 +11,37 @@ workflows:
     scripts:
       - name: Prepare
         script: |
-          chmod +x ./gradlew || true
-          if [ -n "${KEYSTORE_BASE64}" ] && [ "${KEYSTORE_BASE64}" != "<BASE64_KEYSTORE_PLACEHOLDER>" ]; then
+          set -e
+          # Make gradlew executable if present
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew || true
+          fi
+
+          # If gradlew missing but wrapper jar exists, create a simple POSIX wrapper
+          if [ ! -x ./gradlew ] && [ -f ./gradle/wrapper/gradle-wrapper.jar ]; then
+            cat > ./gradlew <<'GRADLEW_SCRIPT'
+#!/bin/sh
+DIR="$(cd "$(dirname "$0")" && pwd)"
+exec java -jar "$DIR/gradle/wrapper/gradle-wrapper.jar" "$@"
+GRADLEW_SCRIPT
+            chmod +x ./gradlew
+          fi
+
+          # Decode keystore if provided
+          if [ -n "${KEYSTORE_BASE64}" ] && [ "${KEYSTORE_BASE64}" != "REPLACE_WITH_BASE64_KEYSTORE" ]; then
             echo "${KEYSTORE_BASE64}" | base64 --decode > ./keystore.jks
           fi
       - name: Build Release
-        script: ./gradlew :app:assembleRelease --no-daemon
+        script: |
+          set -e
+          if [ -x ./gradlew ]; then
+            ./gradlew :app:assembleRelease --no-daemon
+          elif command -v gradle >/dev/null 2>&1; then
+            gradle :app:assembleRelease --no-daemon
+          else
+            echo "No Gradle wrapper (./gradlew) and no system 'gradle' found." >&2
+            exit 127
+          fi
     artifacts:
       - app/build/outputs/**/*.apk
       - app/build/outputs/**/*.aab
