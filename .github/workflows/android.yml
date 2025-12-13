@@ -22,8 +22,8 @@ jobs:
     # Replace 'path/to/your/project' with the actual subfolder name (e.g., 'mobile/', 'app/')
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      working-directory: app
+      working-directory: ./app
       
     - name: Build with Gradle
       run: ./gradlew build
-      working-directory: app
+      working-directory: ./app
