@@ -25,21 +25,38 @@ workflows:
 
           # Decode keystore if provided
           if [ -n "${KEYSTORE_BASE64}" ] && [ "${KEYSTORE_BASE64}" != "REPLACE_WITH_BASE64_KEYSTORE" ]; then
-            echo "${KEYSTORE_BASE64}" | base64 --decode > ./keystore.jks
+            echo "Decoding keystore from Base64..."
+            echo "${KEYSTORE_BASE64}" | base64 --decode > keystore.jks
+            echo "Keystore created successfully"
+            ls -lh keystore.jks
+          else
+            echo "WARNING: KEYSTORE_BASE64 is not set properly. Generate a keystore first."
+            echo "Creating temporary keystore for testing..."
+            keytool -genkey -v -keystore keystore.jks -keyalg RSA -keysize 2048 -validity 10000 \
+              -alias release -storepass blooddonation -keypass blooddonation \
+              -dname "CN=Blood Donation,OU=Dev,O=BloodDonation,L=City,ST=State,C=US"
           fi
       - name: Build Signed Release APK
         script: |
           set -e
+          echo "Current directory: $(pwd)"
+          echo "Checking for keystore..."
+          if [ ! -f keystore.jks ]; then
+            echo "ERROR: keystore.jks not found!"
+            exit 1
+          fi
+          echo "Keystore found: $(ls -lh keystore.jks)"
+          
           if [ -x ./gradlew ]; then
             ./gradlew :app:assembleRelease \
-              -Pandroid.injected.signing.store.file=./keystore.jks \
+              -Pandroid.injected.signing.store.file=$(pwd)/keystore.jks \
               -Pandroid.injected.signing.store.password="${KEYSTORE_PASSWORD}" \
               -Pandroid.injected.signing.key.alias="${KEY_ALIAS}" \
               -Pandroid.injected.signing.key.password="${KEY_PASSWORD}" \
               --no-daemon
           elif command -v gradle >/dev/null 2>&1; then
             gradle :app:assembleRelease \
-              -Pandroid.injected.signing.store.file=./keystore.jks \
+              -Pandroid.injected.signing.store.file=$(pwd)/keystore.jks \
               -Pandroid.injected.signing.store.password="${KEYSTORE_PASSWORD}" \
               -Pandroid.injected.signing.key.alias="${KEY_ALIAS}" \
               -Pandroid.injected.signing.key.password="${KEY_PASSWORD}" \
