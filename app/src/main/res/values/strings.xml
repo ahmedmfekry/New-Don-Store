@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">إدارة المخزون - مركز نقل الدم</string>
+    
+    <!-- Navigation -->
+    <string name="nav_categories">الأصناف</string>
+    <string name="nav_inventory">المخزون</string>
+    <string name="nav_distribution">الصرف</string>
+    <string name="nav_returns">المرتجعات</string>
+    <string name="nav_dashboard">لوحة التحكم</string>
+    
+    <!-- Category -->
+    <string name="add_category">إضافة صنف</string>
+    <string name="category_name">اسم الصنف</string>
+    <string name="category_description">وصف الصنف</string>
+    <string name="category_unit">الوحدة</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete">حذف</string>
+    <string name="edit">تعديل</string>
+    
+    <!-- Inventory -->
+    <string name="add_inventory">إضافة مخزون</string>
+    <string name="inventory_date">تاريخ الإضافة</string>
+    <string name="quantity">العدد</string>
+    <string name="lot_number">LOT Number</string>
+    <string name="expire_date">تاريخ الانتهاء</string>
+    <string name="notes">ملاحظات</string>
+    <string name="available">متاح</string>
+    
+    <!-- Distribution -->
+    <string name="add_distribution">صرف من المخزون</string>
+    <string name="distribution_date">تاريخ الصرف</string>
+    <string name="campaign_name">اسم الحملة</string>
+    <string name="distributed">تم الصرف</string>
+    
+    <!-- Returns -->
+    <string name="add_return">إضافة مرتجع</string>
+    <string name="return_date">تاريخ الإرجاع</string>
+    <string name="return_reason">سبب الإرجاع</string>
+    <string name="returned_by">من قبل</string>
+    
+    <!-- Common -->
+    <string name="loading">جاري التحميل...</string>
+    <string name="error">خطأ</string>
+    <string name="success">تم بنجاح</string>
+    <string name="search">بحث</string>
+    <string name="no_data">لا توجد بيانات</string>
+    <string name="created_at">تم الإنشاء في</string>
+    <string name="status">الحالة</string>
+    <string name="select_category">اختر الصنف</string>
+    
+    <!-- Authentication -->
+    <string name="login">تسجيل الدخول</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="welcome">مرحباً بك</string>
+    
+    <!-- Notifications -->
+    <string name="expiration_alert">تنبيه انتهاء الصلاحية</string>
+    <string name="item_expiring_soon">الصنف قريب من انتهاء الصلاحية</string>
+    <string name="expires_in">ينتهي بعد</string>
+    <string name="days">أيام</string>
+</resources>

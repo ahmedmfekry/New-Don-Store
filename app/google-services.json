@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "857503009188",
+    "project_id": "blood-donation-managemen-ac914",
+    "storage_bucket": "blood-donation-managemen-ac914.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857503009188:android:7c0c8592035f8f3bbed931",
+        "android_client_info": {
+          "package_name": "com.blooddonation.management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857503009188-qm2k0ijdarhjp15vugjjpklbr2a9fj3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTyHcQGkDcTn5uPZzJX18nkd2QDXiWucE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857503009188-qm2k0ijdarhjp15vugjjpklbr2a9fj3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

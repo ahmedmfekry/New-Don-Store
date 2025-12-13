@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.blooddonation.management.ui.fragments.DashboardFragment"
+        android:label="@string/nav_dashboard" />
+
+    <fragment
+        android:id="@+id/nav_categories"
+        android:name="com.blooddonation.management.ui.fragments.CategoriesFragment"
+        android:label="@string/nav_categories" />
+
+    <fragment
+        android:id="@+id/nav_inventory"
+        android:name="com.blooddonation.management.ui.fragments.InventoryFragment"
+        android:label="@string/nav_inventory" />
+
+    <fragment
+        android:id="@+id/nav_distribution"
+        android:name="com.blooddonation.management.ui.fragments.DistributionFragment"
+        android:label="@string/nav_distribution" />
+
+    <fragment
+        android:id="@+id/nav_returns"
+        android:name="com.blooddonation.management.ui.fragments.ReturnsFragment"
+        android:label="@string/nav_returns" />
+
+</navigation>
