@@ -19,7 +19,7 @@ workflows:
 
           # If gradlew missing but wrapper jar exists, create a simple POSIX wrapper
           if [ ! -x ./gradlew ] && [ -f ./gradle/wrapper/gradle-wrapper.jar ]; then
-            printf '%s\n' '#!/bin/sh' 'DIR="$(cd "$(dirname "$0")" && pwd)"' 'exec java -jar "'$'DIR'/gradle/wrapper/gradle-wrapper.jar" "$@"' > ./gradlew
+            printf '%s\n' '#!/bin/sh' "DIR=\"\$(cd \"\$(dirname \"\$0\")\" && pwd)\"" 'exec java -jar "$DIR/gradle/wrapper/gradle-wrapper.jar" "$@"' > ./gradlew
             chmod +x ./gradlew
           fi
 
