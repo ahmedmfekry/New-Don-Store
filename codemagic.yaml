@@ -5,9 +5,9 @@ workflows:
     environment:
       vars:
         KEYSTORE_BASE64: REPLACE_WITH_BASE64_KEYSTORE
-        KEYSTORE_PASSWORD: REPLACE_WITH_KEYSTORE_PASSWORD
-        KEY_ALIAS: REPLACE_WITH_KEY_ALIAS
-        KEY_PASSWORD: REPLACE_WITH_KEY_PASSWORD
+        KEYSTORE_PASSWORD: blooddonation
+        KEY_ALIAS: release
+        KEY_PASSWORD: blooddonation
     scripts:
       - name: Prepare
         script: |
@@ -27,13 +27,23 @@ workflows:
           if [ -n "${KEYSTORE_BASE64}" ] && [ "${KEYSTORE_BASE64}" != "REPLACE_WITH_BASE64_KEYSTORE" ]; then
             echo "${KEYSTORE_BASE64}" | base64 --decode > ./keystore.jks
           fi
-      - name: Build Release
+      - name: Build Signed Release APK
         script: |
           set -e
           if [ -x ./gradlew ]; then
-            ./gradlew :app:assembleRelease --no-daemon
+            ./gradlew :app:assembleRelease \
+              -Pandroid.injected.signing.store.file=./keystore.jks \
+              -Pandroid.injected.signing.store.password="${KEYSTORE_PASSWORD}" \
+              -Pandroid.injected.signing.key.alias="${KEY_ALIAS}" \
+              -Pandroid.injected.signing.key.password="${KEY_PASSWORD}" \
+              --no-daemon
           elif command -v gradle >/dev/null 2>&1; then
-            gradle :app:assembleRelease --no-daemon
+            gradle :app:assembleRelease \
+              -Pandroid.injected.signing.store.file=./keystore.jks \
+              -Pandroid.injected.signing.store.password="${KEYSTORE_PASSWORD}" \
+              -Pandroid.injected.signing.key.alias="${KEY_ALIAS}" \
+              -Pandroid.injected.signing.key.password="${KEY_PASSWORD}" \
+              --no-daemon
           else
             echo "No Gradle wrapper (./gradlew) and no system 'gradle' found." >&2
             exit 127
