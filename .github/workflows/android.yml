@@ -8,11 +8,9 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        # **<<< REMOVE THIS LINE OR CORRECT THE PATH >>>**
-        working-directory: /app 
+
     steps:
     - uses: actions/checkout@v4
     - name: set up JDK 11
@@ -22,11 +20,12 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    # Replace 'path/to/your/project' with the actual subfolder name (e.g., 'mobile/', 'app/')
+    # FIX: Explicitly set the working directory to the repository root.
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      working-directory: /app
+      working-directory: ${{ github.workspace }}/app
       
+    # FIX: Apply the same working directory for the build step.
     - name: Build with Gradle
       run: ./gradlew build
-      working-directory: /app
+      working-directory: ${{ github.workspace }}/app
