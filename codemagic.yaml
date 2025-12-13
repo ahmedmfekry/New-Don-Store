@@ -3,20 +3,24 @@ workflows:
     name: Build Android (Gradle)
     max_build_duration: 60
     environment:
-      flutter: false
       vars:
-        # Provide a base64-encoded keystore via Codemagic UI or encrypted vars
-        KEYSTORE_BASE64: ""
-        KEYSTORE_PASSWORD: ""
-        KEY_ALIAS: ""
-        KEY_PASSWORD: ""
-      android:
-        gradle_cache: true
+        KEYSTORE_BASE64:
+          value: "<BASE64_KEYSTORE_PLACEHOLDER>"
+          secure: true
+        KEYSTORE_PASSWORD:
+          value: "<KEYSTORE_PASSWORD>"
+          secure: true
+        KEY_ALIAS:
+          value: "<KEY_ALIAS>"
+          secure: true
+        KEY_PASSWORD:
+          value: "<KEY_PASSWORD>"
+          secure: true
     scripts:
       - name: Prepare
         script: |
           chmod +x ./gradlew || true
-          if [ -n "${KEYSTORE_BASE64}" ]; then
+          if [ -n "${KEYSTORE_BASE64}" ] && [ "${KEYSTORE_BASE64}" != "<BASE64_KEYSTORE_PLACEHOLDER>" ]; then
             echo "${KEYSTORE_BASE64}" | base64 --decode > ./keystore.jks
           fi
       - name: Build Release
