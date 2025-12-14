@@ -9,7 +9,6 @@
         <item name="colorErrorContainer">#F9DEDC</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="colorBackground">@color/background</item>
-        <item name="android:colorSurface">@color/surface</item>
         <item name="colorSurface">@color/surface</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
