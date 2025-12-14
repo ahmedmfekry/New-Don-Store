@@ -62,4 +62,7 @@
     <string name="item_expiring_soon">الصنف قريب من انتهاء الصلاحية</string>
     <string name="expires_in">ينتهي بعد</string>
     <string name="days">أيام</string>
+    
+    <!-- Firebase/Google -->
+    <string name="default_web_client_id">857503009188-qm2k0ijdarhjp15vugjjpklbr2a9fj3j.apps.googleusercontent.com</string>
 </resources>

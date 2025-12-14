@@ -1,7 +1,7 @@
 package com.blooddonation.management.data.firebase
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.tasks.await
@@ -17,14 +17,7 @@ class FirebaseAuthManager @Inject constructor() {
 
     fun getCurrentUser() = auth.currentUser
 
-    suspend fun signInWithGoogle(idToken: String) {
-        try {
-            val credential = GoogleAuthProvider.getCredential(idToken, null)
-            auth.signInWithCredential(credential).await()
-        } catch (e: Exception) {
-            throw Exception("فشل تسجيل الدخول: ${e.message}")
-        }
-    }
+
 
     suspend fun signOut() {
         auth.signOut()

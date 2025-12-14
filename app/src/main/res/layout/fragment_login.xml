@@ -54,19 +54,7 @@
             android:textSize="16sp" />
 
         <!-- Google Sign In Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/googleSignInButton"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginBottom="16dp"
-            android:text="تسجيل الدخول بـ Google"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:backgroundTint="?attr/colorPrimary"
-            app:cornerRadius="12dp"
-            app:elevation="4dp"
-            app:icon="@android:drawable/ic_dialog_info"
-            app:iconGravity="textStart" />
+
 
         <!-- Loading Progress Bar -->
         <ProgressBar
