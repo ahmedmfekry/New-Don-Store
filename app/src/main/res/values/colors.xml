@@ -4,6 +4,7 @@
     <color name="primary_dark">#8B1428</color>
     <color name="accent">#FF5733</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="gray">#F5F5F5</color>
     <color name="dark_gray">#757575</color>
     <color name="text_primary">#212121</color>
@@ -15,4 +16,20 @@
     <color name="info">#2196F3</color>
     <color name="background">#FAFAFA</color>
     <color name="surface">#FFFFFF</color>
+
+    <!-- Status Backgrounds -->
+    <color name="status_expired_bg">#FFEBEE</color>
+    <color name="status_expired_text">#C62828</color>
+    <color name="status_near_expiry_bg">#FFF3E0</color>
+    <color name="status_near_expiry_text">#EF6C00</color>
+    <color name="status_valid_bg">#E8F5E9</color>
+    <color name="status_valid_text">#2E7D32</color>
+
+    <!-- Card Backgrounds -->
+    <color name="card_blue_bg">#E3F2FD</color>
+    <color name="card_blue_icon">#1565C0</color>
+    <color name="card_green_bg">#E8F5E9</color>
+    <color name="card_green_icon">#2E7D32</color>
+    <color name="card_orange_bg">#FFF3E0</color>
+    <color name="card_orange_icon">#EF6C00</color>
 </resources>

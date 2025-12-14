@@ -31,13 +31,46 @@ class InventoryAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: InventoryItem) {
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale("ar"))
+            val now = System.currentTimeMillis()
+            val thirtyDaysInMillis = 30L * 24 * 60 * 60 * 1000
+            val expireDate = item.expireDate
+            val context = binding.root.context
 
             binding.categoryName.text = item.categoryName
-            binding.quantity.text = "الكمية: ${item.quantity} ${item.unit}"
-            binding.lotNumber.text = "LOT: ${item.lotNumber}"
-            binding.expireDate.text = "ينتهي: ${dateFormat.format(Date(item.expireDate))}"
-            binding.status.text = item.status
-            binding.notes.text = item.notes
+            binding.quantity.text = "${item.quantity} ${item.unit}"
+            binding.lotNumber.text = item.lotNumber
+            binding.expireDate.text = dateFormat.format(Date(expireDate))
+            
+            // Status Logic
+            if (expireDate < now) {
+                // Expired
+                binding.cardView.setCardBackgroundColor(context.getColor(com.blooddonation.management.R.color.status_expired_bg))
+                binding.cardView.strokeColor = context.getColor(com.blooddonation.management.R.color.status_expired_text)
+                binding.status.text = "منتهي الصلاحية"
+                binding.status.setTextColor(context.getColor(com.blooddonation.management.R.color.status_expired_text))
+                binding.expireDate.setTextColor(context.getColor(com.blooddonation.management.R.color.status_expired_text))
+            } else if (expireDate - now < thirtyDaysInMillis) {
+                // Near Expiry
+                binding.cardView.setCardBackgroundColor(context.getColor(com.blooddonation.management.R.color.status_near_expiry_bg))
+                binding.cardView.strokeColor = context.getColor(com.blooddonation.management.R.color.status_near_expiry_text)
+                binding.status.text = "قريب الانتهاء"
+                binding.status.setTextColor(context.getColor(com.blooddonation.management.R.color.status_near_expiry_text))
+                binding.expireDate.setTextColor(context.getColor(com.blooddonation.management.R.color.status_near_expiry_text))
+            } else {
+                // Valid
+                binding.cardView.setCardBackgroundColor(context.getColor(com.blooddonation.management.R.color.white))
+                binding.cardView.strokeColor = context.getColor(com.blooddonation.management.R.color.divider)
+                binding.status.text = "صالح"
+                binding.status.setTextColor(context.getColor(com.blooddonation.management.R.color.status_valid_text))
+                binding.expireDate.setTextColor(context.getColor(com.blooddonation.management.R.color.text_primary))
+            }
+
+            if (item.notes.isNotEmpty()) {
+                binding.notes.visibility = android.view.View.VISIBLE
+                binding.notes.text = item.notes
+            } else {
+                binding.notes.visibility = android.view.View.GONE
+            }
 
             binding.root.setOnClickListener { onItemClick(item) }
         }
