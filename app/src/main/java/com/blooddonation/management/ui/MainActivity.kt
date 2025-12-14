@@ -9,8 +9,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.blooddonation.management.R
+import com.blooddonation.management.data.firebase.FirebaseAuthManager
 import com.blooddonation.management.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,10 +21,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    @Inject
+    lateinit var firebaseAuthManager: FirebaseAuthManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // التحقق من تسجيل الدخول - Login is mandatory
+        if (!firebaseAuthManager.isUserLoggedIn()) {
+            // إذا لم يكن المستخدم مسجلاً دخول، سيتم التنقل لشاشة Login تلقائياً
+            // (من خلال startDestination في nav_graph)
+        }
 
         setSupportActionBar(binding.toolbar)
 
@@ -42,6 +53,14 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
+
+        // مراقبة حالة المستخدم وعودته للـ Login إذا سجل خروج
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            // إذا لم يكن المستخدم مسجلاً دخول وحاول الوصول لصفحة محمية
+            if (destination.id != R.id.nav_login && !firebaseAuthManager.isUserLoggedIn()) {
+                navController.navigate(R.id.nav_login)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

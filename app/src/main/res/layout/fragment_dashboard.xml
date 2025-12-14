@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="?attr/colorBackground"
     android:fillViewport="true">
 
     <LinearLayout
@@ -12,23 +12,25 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Header Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="التنبيهات"
-            android:textColor="@color/text_primary"
-            android:textSize="24sp"
+            android:layout_marginBottom="4dp"
+            android:text="لوحة التحكم"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="28sp"
             android:textStyle="bold" />
-        
+
         <TextView
-             android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:text="متابعة تواريخ انتهاء صلاحية المخزون"
-            android:textColor="@color/text_secondary"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="14sp" />
 
+        <!-- Status Cards -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,27 +41,28 @@
             <!-- Valid Items Card (Green) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginEnd="4dp"
+                android:layout_height="140dp"
+                android:layout_marginEnd="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/status_valid_bg"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
                 app:strokeColor="@color/status_valid_text"
-                app:strokeWidth="1dp">
+                app:strokeWidth="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_check_circle" 
-                        app:tint="@color/status_valid_text" /> 
-                         <!-- Note: Assumes ic_check_circle exists, otherwise will need to use available icon -->
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:contentDescription="صالح"
+                        android:src="@drawable/ic_check_circle"
+                        app:tint="@color/status_valid_text" />
 
                     <TextView
                         android:id="@+id/valid_count"
@@ -68,39 +71,43 @@
                         android:layout_marginTop="8dp"
                         android:text="0"
                         android:textColor="@color/status_valid_text"
-                        android:textSize="24sp"
+                        android:textSize="26sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:text="صالح"
                         android:textColor="@color/status_valid_text"
-                        android:textSize="12sp" />
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Near Expiry Card (Orange) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginHorizontal="4dp"
+                android:layout_height="140dp"
+                android:layout_marginHorizontal="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/status_near_expiry_bg"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
                 app:strokeColor="@color/status_near_expiry_text"
-                app:strokeWidth="1dp">
+                app:strokeWidth="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:contentDescription="قريب الانتهاء"
                         android:src="@android:drawable/ic_menu_recent_history"
                         app:tint="@color/status_near_expiry_text" />
 
@@ -111,40 +118,44 @@
                         android:layout_marginTop="8dp"
                         android:text="0"
                         android:textColor="@color/status_near_expiry_text"
-                        android:textSize="24sp"
+                        android:textSize="26sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:gravity="center"
-                        android:text="قريب الانتهاء\n(خلال شهر)"
+                        android:text="قريب"
                         android:textColor="@color/status_near_expiry_text"
-                        android:textSize="10sp" />
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Expired Card (Red) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="4dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/status_expired_bg"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
                 app:strokeColor="@color/status_expired_text"
-                app:strokeWidth="1dp">
+                app:strokeWidth="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:contentDescription="منتهى"
                         android:src="@android:drawable/ic_delete"
                         app:tint="@color/status_expired_text" />
 
@@ -155,48 +166,48 @@
                         android:layout_marginTop="8dp"
                         android:text="0"
                         android:textColor="@color/status_expired_text"
-                        android:textSize="24sp"
+                        android:textSize="26sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="منتهى الصلاحية"
+                        android:layout_marginTop="4dp"
+                        android:text="منتهى"
                         android:textColor="@color/status_expired_text"
-                        android:textSize="12sp" />
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
+        <!-- Expired Items Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            android:drawablePadding="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="12dp"
             android:text="أصناف منتهية الصلاحية"
-            android:textColor="@color/error"
+            android:textColor="?attr/colorError"
             android:textSize="18sp"
-            android:textStyle="bold"
-            app:drawableStartCompat="@android:drawable/stat_notify_error"
-            app:drawableTint="@color/error" />
+            android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/empty_state_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:text="@string/no_data"
-            android:textColor="@color/text_secondary"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="16sp"
             android:visibility="gone" />
 
@@ -206,6 +217,7 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
+            android:paddingBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>

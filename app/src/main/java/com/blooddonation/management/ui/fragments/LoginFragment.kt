@@ -53,22 +53,36 @@ class LoginFragment : Fragment() {
             return
         }
 
-        // Configure Google Sign In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+        // Configure Google Sign In with proper error handling
+        try {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .requestProfile()
+                .build()
 
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+            googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
-        binding.googleSignInButton.setOnClickListener {
-            signIn()
+            binding.googleSignInButton.setOnClickListener {
+                signIn()
+            }
+        } catch (e: Exception) {
+            showError("فشل في إعداد تسجيل الدخول: ${e.message}")
         }
     }
 
     private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_In)
+        try {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.googleSignInButton.isEnabled = false
+            
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_In)
+        } catch (e: Exception) {
+            binding.progressBar.visibility = View.GONE
+            binding.googleSignInButton.isEnabled = true
+            showError("خطأ في بدء تسجيل الدخول: ${e.message}")
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -77,33 +91,68 @@ class LoginFragment : Fragment() {
         if (requestCode == RC_SIGN_In) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
+                val account = task.getResult(ApiException::class.java)
+                if (account != null && account.idToken != null) {
+                    firebaseAuthWithGoogle(account.idToken!!)
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                    binding.googleSignInButton.isEnabled = true
+                    showError("فشل في الحصول على رمز المصادقة")
+                }
             } catch (e: ApiException) {
-                Toast.makeText(requireContext(), "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                binding.progressBar.visibility = View.GONE
+                binding.googleSignInButton.isEnabled = true
+                handleGoogleSignInError(e)
             }
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.googleSignInButton.isEnabled = false
+    private fun handleGoogleSignInError(e: ApiException) {
+        val errorMessage = when (e.statusCode) {
+            12500 -> "خطأ في التكوين - تحقق من google-services.json وكود العميل"
+            12501 -> "تم إلغاء تسجيل الدخول من قبل المستخدم"
+            12502 -> "خطأ في الاتصال - تحقق من الإنترنت"
+            12503 -> "خطأ في الخادم - حاول مرة أخرى لاحقاً"
+            else -> "فشل تسجيل الدخول بـ Google: ${e.message}"
+        }
+        showError(errorMessage)
+    }
 
+    private fun firebaseAuthWithGoogle(idToken: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                // تسجيل الدخول
                 firebaseAuthManager.signInWithGoogle(idToken)
+                
+                // الحصول على معرّف المستخدم
+                val userId = firebaseAuthManager.getUserId()
+                if (userId != null) {
+                    // حفظ بيانات المستخدم على Firebase
+                    firebaseAuthManager.updateUserProfile(userId)
+                }
+                
                 withContext(Dispatchers.Main) {
                     binding.progressBar.visibility = View.GONE
+                    showSuccess("تم تسجيل الدخول بنجاح!")
+                    // الانتقال للـ Dashboard بعد حفظ البيانات
                     findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     binding.progressBar.visibility = View.GONE
                     binding.googleSignInButton.isEnabled = true
-                    Toast.makeText(requireContext(), "Authentication Failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    showError("خطأ في المصادقة: ${e.message}")
                 }
             }
         }
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun showSuccess(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

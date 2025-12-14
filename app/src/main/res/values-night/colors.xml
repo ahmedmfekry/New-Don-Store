@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material Design 3 Colors - Dark Mode -->
+    <color name="primary">#FFB4C7</color>
+    <color name="primary_dark">#FF7E8F</color>
+    <color name="accent">#FFB4C7</color>
+    <color name="white">#121212</color>
+    <color name="black">#FFFFFF</color>
+    <color name="gray">#1E1E1E</color>
+    <color name="dark_gray">#B0B0B0</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="divider">#424242</color>
+    <color name="success">#81C784</color>
+    <color name="error">#EF5350</color>
+    <color name="warning">#FFB74D</color>
+    <color name="info">#64B5F6</color>
+    <color name="background">#121212</color>
+    <color name="surface">#1E1E1E</color>
+
+    <!-- Status Backgrounds - Dark Mode -->
+    <color name="status_expired_bg">#B71C1C</color>
+    <color name="status_expired_text">#FFCDD2</color>
+    <color name="status_near_expiry_bg">#E65100</color>
+    <color name="status_near_expiry_text">#FFE0B2</color>
+    <color name="status_valid_bg">#1B5E20</color>
+    <color name="status_valid_text">#C8E6C9</color>
+
+    <!-- Card Backgrounds - Dark Mode -->
+    <color name="card_blue_bg">#0D47A1</color>
+    <color name="card_blue_icon">#90CAF9</color>
+    <color name="card_green_bg">#1B5E20</color>
+    <color name="card_green_icon">#81C784</color>
+    <color name="card_orange_bg">#E65100</color>
+    <color name="card_orange_icon">#FFB74D</color>
+</resources>

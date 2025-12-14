@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.BloodDonation" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.BloodDonation" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryContainer">@color/primary_dark</item>
         <item name="colorSecondary">@color/accent</item>
         <item name="colorSecondaryContainer">@color/accent</item>
         <item name="colorError">@color/error</item>
-        <item name="colorErrorContainer">#F9DEDC</item>
+        <item name="colorErrorContainer">#5F2C2C</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:layoutDirection">rtl</item>
     </style>
 
-    <style name="ButtonStyle" parent="Widget.Material3.Button">
+    <style name="ButtonStyle" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/primary</item>
         <item name="cornerRadius">12dp</item>
