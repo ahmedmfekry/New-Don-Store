@@ -21,22 +21,7 @@ class BloodDonationRepository @Inject constructor(
     private val returnDao: ReturnDao,
     private val authManager: com.blooddonation.management.data.firebase.FirebaseAuthManager
 ) {
-    // ... (existing code omitted for brevity in prompt, but replacing file requires context or careful chunking)
-    // Actually, I should use multiple chunks or just target the specific areas.
-    // The previous tool replaced almost the whole file structure.
-    // Let's target the Import section and then the Sync functions.
-    
-    // BUT replace_file_content with AllowMultiple=true is better here.
-    
-    // Let's do imports first.
 
-class BloodDonationRepository @Inject constructor(
-    private val categoryDao: CategoryDao,
-    private val inventoryDao: InventoryDao,
-    private val distributionDao: DistributionDao,
-    private val returnDao: ReturnDao,
-    private val authManager: com.blooddonation.management.data.firebase.FirebaseAuthManager
-) {
     // Category Operations
     suspend fun addCategory(category: Category) = categoryDao.insertCategory(category)
     suspend fun updateCategory(category: Category) = categoryDao.updateCategory(category)
