@@ -8,6 +8,9 @@
         <item name="colorError">@color/error</item>
         <item name="colorErrorContainer">#5F2C2C</item>
         <item name="android:colorBackground">@color/background</item>
+        <item name="colorBackground">@color/background</item>
+        <item name="android:colorSurface">@color/surface</item>
+        <item name="colorSurface">@color/surface</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:layoutDirection">rtl</item>
