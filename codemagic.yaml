@@ -59,9 +59,9 @@ workflows:
           dYKTMsoAPAgsZsMVFs3SqYqEJnN5aUq6aqFwfiXJnE60EI17lPEhBOQ2/Z6/CegK
           SQZdJNV6dQzNME0wMTANBglghkgBZQMEAgEFAAQgr8jWforTqp0eKij9vZTrKHu2
           dYyaznQvPL4zys3y87EEFP1Ja2FbtpOaUFLEQvTLHFoCEE+/AgInEA==
-        KEYSTORE_PASSWORD: "@leXfekrY77"
+        KEYSTORE_PASSWORD: @leXfekrY77
         KEY_ALIAS: donation store
-        KEY_PASSWORD: "@leXfekrY77"
+        KEY_PASSWORD: @leXfekrY77
     scripts:
       - name: Prepare
         script: |
@@ -130,4 +130,3 @@ workflows:
       email:
         recipients:
           - your-email@example.com
-
