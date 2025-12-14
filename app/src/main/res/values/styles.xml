@@ -7,7 +7,9 @@
         <item name="colorSecondaryContainer">@color/accent</item>
         <item name="colorError">@color/error</item>
         <item name="colorErrorContainer">#F9DEDC</item>
+        <!-- Provide both platform and app attr for background color -->
         <item name="android:colorBackground">@color/background</item>
+        <item name="colorBackground">@color/background</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:layoutDirection">rtl</item>
