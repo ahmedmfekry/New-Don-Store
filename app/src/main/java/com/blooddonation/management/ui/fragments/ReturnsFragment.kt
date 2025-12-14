@@ -76,14 +76,34 @@ class ReturnsFragment : Fragment() {
     }
 
     private fun showAddReturnDialog() {
-        MaterialAlertDialogBuilder(requireContext())
+        val dialogView = LayoutInflater.from(requireContext()).inflate(com.blooddonation.management.R.layout.dialog_add_return, null)
+        val itemSpinner = dialogView.findViewById<android.widget.AutoCompleteTextView>(com.blooddonation.management.R.id.itemSpinner)
+        val quantityInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.blooddonation.management.R.id.quantityInput)
+        val reasonInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.blooddonation.management.R.id.reasonInput)
+
+        // TODO: Populate itemSpinner with inventory items.
+
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle("إضافة مرتجع")
-            .setMessage("سيتم فتح نموذج إضافة المرتجعات")
-            .setPositiveButton("تابع") { _, _ ->
-                // TODO: Open add return dialog
+            .setView(dialogView)
+            .setPositiveButton("حفظ") { _, _ ->
+                val quantity = quantityInput.text.toString().toIntOrNull()
+                val reason = reasonInput.text.toString()
+
+                if (quantity != null && reason.isNotEmpty()) {
+                    val returnItem = com.blooddonation.management.data.models.ReturnItem(
+                        itemId = 0, // Placeholder
+                        itemName = "Returned Item", // Placeholder
+                        quantity = quantity,
+                        reason = reason,
+                        date = System.currentTimeMillis()
+                    )
+                    viewModel.addReturn(returnItem)
+                }
             }
             .setNegativeButton("إلغاء", null)
-            .show()
+            .create()
+        dialog.show()
     }
 
     private fun observeReturns() {

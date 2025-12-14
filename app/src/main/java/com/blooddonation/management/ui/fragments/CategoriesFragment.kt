@@ -62,11 +62,21 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun showAddDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(com.blooddonation.management.R.layout.dialog_add_category, null)
+        val nameInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.blooddonation.management.R.id.categoryNameInput)
+        val descriptionInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.blooddonation.management.R.id.categoryDescriptionInput)
+
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle("إضافة صنف جديد")
-            .setView(createCategoryInputView())
+            .setView(dialogView)
             .setPositiveButton("حفظ") { _, _ ->
-                // TODO: Get values and add category
+                val name = nameInput.text.toString()
+                val description = descriptionInput.text.toString()
+
+                if (name.isNotEmpty()) {
+                    val category = Category(name = name, description = description)
+                    viewModel.addCategory(category)
+                }
             }
             .setNegativeButton("إلغاء", null)
             .create()

@@ -61,6 +61,32 @@ class FirebaseAuthManager @Inject constructor() {
         }
     }
 
+    suspend fun syncDistributionsToFirebase(
+        userId: String,
+        distributionData: List<Map<String, Any>>
+    ) {
+        try {
+            firestore.collection("users").document(userId)
+                .collection("inventory").document("distributions")
+                .set(mapOf("items" to distributionData)).await()
+        } catch (e: Exception) {
+            throw Exception("فشل مزامنة المنصرف: ${e.message}")
+        }
+    }
+
+    suspend fun syncReturnsToFirebase(
+        userId: String,
+        returnData: List<Map<String, Any>>
+    ) {
+        try {
+            firestore.collection("users").document(userId)
+                .collection("inventory").document("returns")
+                .set(mapOf("items" to returnData)).await()
+        } catch (e: Exception) {
+            throw Exception("فشل مزامنة المرتجعات: ${e.message}")
+        }
+    }
+
     suspend fun getFCMToken(): String {
         return try {
             messaging.token.await()

@@ -76,14 +76,37 @@ class DistributionFragment : Fragment() {
     }
 
     private fun showAddDistributionDialog() {
-        MaterialAlertDialogBuilder(requireContext())
+        val dialogView = LayoutInflater.from(requireContext()).inflate(com.blooddonation.management.R.layout.dialog_add_distribution, null)
+        val itemSpinner = dialogView.findViewById<android.widget.AutoCompleteTextView>(com.blooddonation.management.R.id.itemSpinner)
+        val quantityInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.blooddonation.management.R.id.quantityInput)
+        val recipientInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.blooddonation.management.R.id.recipientInput)
+        val notesInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.blooddonation.management.R.id.notesInput)
+
+        // TODO: Populate itemSpinner with inventory items.
+
+        val dialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle("صرف من المخزون")
-            .setMessage("سيتم فتح نموذج صرف المخزون")
-            .setPositiveButton("تابع") { _, _ ->
-                // TODO: Open add distribution dialog
+            .setView(dialogView)
+            .setPositiveButton("حفظ") { _, _ ->
+                val quantity = quantityInput.text.toString().toIntOrNull()
+                val recipient = recipientInput.text.toString()
+                val notes = notesInput.text.toString()
+
+                if (quantity != null && recipient.isNotEmpty()) {
+                    val distribution = com.blooddonation.management.data.models.Distribution(
+                        itemId = 0, // Placeholder
+                        itemName = "Dispensed Item", // Placeholder
+                        quantity = quantity,
+                        recipient = recipient,
+                        notes = notes,
+                        date = System.currentTimeMillis()
+                    )
+                    viewModel.addDistribution(distribution)
+                }
             }
             .setNegativeButton("إلغاء", null)
-            .show()
+            .create()
+        dialog.show()
     }
 
     private fun observeDistributions() {
