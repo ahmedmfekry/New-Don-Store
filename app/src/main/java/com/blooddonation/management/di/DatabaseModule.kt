@@ -46,13 +46,15 @@ object DatabaseModule {
     fun provideReturnDao(database: AppDatabase): ReturnDao = database.returnDao()
 
     @Singleton
+    @Singleton
     @Provides
     fun provideBloodDonationRepository(
         categoryDao: CategoryDao,
         inventoryDao: InventoryDao,
         distributionDao: DistributionDao,
-        returnDao: ReturnDao
+        returnDao: ReturnDao,
+        authManager: com.blooddonation.management.data.firebase.FirebaseAuthManager
     ): BloodDonationRepository {
-        return BloodDonationRepository(categoryDao, inventoryDao, distributionDao, returnDao)
+        return BloodDonationRepository(categoryDao, inventoryDao, distributionDao, returnDao, authManager)
     }
 }

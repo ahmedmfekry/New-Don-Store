@@ -92,11 +92,13 @@ class ReturnsFragment : Fragment() {
 
                 if (quantity != null && reason.isNotEmpty()) {
                     val returnItem = com.blooddonation.management.data.models.ReturnItem(
-                        itemId = 0, // Placeholder
-                        itemName = "Returned Item", // Placeholder
+                        categoryName = "Returned Item", // Placeholder
                         quantity = quantity,
+                        unit = "Unit", // Placeholder
+                        lotNumber = "N/A", // Placeholder
+                        expireDate = System.currentTimeMillis(), // Placeholder
                         reason = reason,
-                        date = System.currentTimeMillis()
+                        returnDate = System.currentTimeMillis()
                     )
                     viewModel.addReturn(returnItem)
                 }

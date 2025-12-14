@@ -118,11 +118,12 @@ class BloodDonationRepository @Inject constructor(
                     val data = items.map { 
                         mapOf(
                             "id" to it.id,
-                            "itemName" to it.itemName,
+                            "inventoryId" to it.inventoryId,
+                            "categoryName" to it.categoryName,
                             "quantity" to it.quantity,
-                            "recipient" to it.recipient,
+                            "campaignName" to it.campaignName,
                             "notes" to it.notes,
-                            "date" to it.date
+                            "distributionDate" to it.distributionDate
                         ) 
                     }
                     authManager.syncDistributionsToFirebase(user.uid, data)
@@ -142,10 +143,10 @@ class BloodDonationRepository @Inject constructor(
                     val data = items.map { 
                         mapOf(
                             "id" to it.id,
-                            "itemName" to it.itemName,
+                            "categoryName" to it.categoryName,
                             "quantity" to it.quantity,
                             "reason" to it.reason,
-                            "date" to it.date
+                            "returnDate" to it.returnDate
                         ) 
                     }
                     authManager.syncReturnsToFirebase(user.uid, data)

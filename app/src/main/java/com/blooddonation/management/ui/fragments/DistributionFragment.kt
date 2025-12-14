@@ -94,12 +94,15 @@ class DistributionFragment : Fragment() {
 
                 if (quantity != null && recipient.isNotEmpty()) {
                     val distribution = com.blooddonation.management.data.models.Distribution(
-                        itemId = 0, // Placeholder
-                        itemName = "Dispensed Item", // Placeholder
+                        inventoryId = 0, // Placeholder
+                        categoryName = "Dispensed Item", // Placeholder
                         quantity = quantity,
-                        recipient = recipient,
+                        unit = "Unit", // Placeholder
+                        lotNumber = "N/A", // Placeholder
+                        expireDate = System.currentTimeMillis(), // Placeholder
+                        campaignName = recipient, // Using recipient input as campaign/recipient
                         notes = notes,
-                        date = System.currentTimeMillis()
+                        distributionDate = System.currentTimeMillis()
                     )
                     viewModel.addDistribution(distribution)
                 }
