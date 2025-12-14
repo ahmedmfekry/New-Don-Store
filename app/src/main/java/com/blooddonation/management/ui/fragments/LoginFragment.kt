@@ -109,11 +109,12 @@ class LoginFragment : Fragment() {
 
     private fun handleGoogleSignInError(e: ApiException) {
         val errorMessage = when (e.statusCode) {
+            10 -> "خطأ في Google Play Services - تأكد من تثبيت وتحديث Google Play Services"
             12500 -> "خطأ في التكوين - تحقق من google-services.json وكود العميل"
             12501 -> "تم إلغاء تسجيل الدخول من قبل المستخدم"
             12502 -> "خطأ في الاتصال - تحقق من الإنترنت"
             12503 -> "خطأ في الخادم - حاول مرة أخرى لاحقاً"
-            else -> "فشل تسجيل الدخول بـ Google: ${e.message}"
+            else -> "فشل تسجيل الدخول بـ Google (${e.statusCode}): ${e.message}"
         }
         showError(errorMessage)
     }
