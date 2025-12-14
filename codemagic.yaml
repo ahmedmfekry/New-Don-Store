@@ -4,10 +4,64 @@ workflows:
     max_build_duration: 60
     environment:
       vars:
-        KEYSTORE_BASE64: REPLACE_WITH_BASE64_KEYSTORE
-        KEYSTORE_PASSWORD: blooddonation
-        KEY_ALIAS: release
-        KEY_PASSWORD: blooddonation
+        KEYSTORE_BASE64: |
+          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
+        KEYSTORE_PASSWORD: @leXfekrY77
+        KEY_ALIAS: donation store
+        KEY_PASSWORD: @leXfekrY77
     scripts:
       - name: Prepare
         script: |
@@ -23,17 +77,21 @@ workflows:
             chmod +x ./gradlew
           fi
 
-          # Decode keystore if provided
-          if [ -n "${KEYSTORE_BASE64}" ] && [ "${KEYSTORE_BASE64}" != "REPLACE_WITH_BASE64_KEYSTORE" ]; then
+          # Use local keystore if available, otherwise decode from Base64
+          if [ -f my-upload-key ]; then
+            echo "Found local keystore file 'my-upload-key', using it..."
+            cp my-upload-key keystore.jks
+            ls -lh keystore.jks
+          elif [ -n "${KEYSTORE_BASE64}" ] && [ "${KEYSTORE_BASE64}" != "REPLACE_WITH_BASE64_KEYSTORE" ]; then
             echo "Decoding keystore from Base64..."
             echo "${KEYSTORE_BASE64}" | base64 --decode > keystore.jks
             echo "Keystore created successfully"
             ls -lh keystore.jks
           else
-            echo "WARNING: KEYSTORE_BASE64 is not set properly. Generate a keystore first."
+            echo "WARNING: No keystore found (my-upload-key or KEYSTORE_BASE64). Generate a keystore first."
             echo "Creating temporary keystore for testing..."
             keytool -genkey -v -keystore keystore.jks -keyalg RSA -keysize 2048 -validity 10000 \
-              -alias release -storepass blooddonation -keypass blooddonation \
+              -alias "${KEY_ALIAS}" -storepass "${KEYSTORE_PASSWORD}" -keypass "${KEY_PASSWORD}" \
               -dname "CN=Blood Donation,OU=Dev,O=BloodDonation,L=City,ST=State,C=US"
           fi
       - name: Build Signed Release APK
