@@ -46,7 +46,6 @@ object DatabaseModule {
     fun provideReturnDao(database: AppDatabase): ReturnDao = database.returnDao()
 
     @Singleton
-    @Singleton
     @Provides
     fun provideBloodDonationRepository(
         categoryDao: CategoryDao,
