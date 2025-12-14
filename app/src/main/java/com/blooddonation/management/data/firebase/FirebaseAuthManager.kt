@@ -190,3 +190,5 @@ class FirebaseAuthManager @Inject constructor() {
         }
         return false
     }
+
+}
