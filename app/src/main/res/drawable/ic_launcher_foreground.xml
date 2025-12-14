@@ -4,96 +4,40 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    
-    <!-- Background Circle -->
-    <circle
-        android:cx="54"
-        android:cy="54"
-        android:r="48"
-        android:fillColor="#D32F2F" />
-    
-    <!-- Syringe (محقنة) - Left Side -->
-    <!-- Syringe Barrel -->
-    <rect
-        android:left="28"
-        android:top="35"
-        android:right="42"
-        android:bottom="70"
-        android:fillColor="#FFFFFF" />
-    
-    <!-- Syringe Plunger -->
-    <circle
-        android:cx="35"
-        android:cy="28"
-        android:r="6"
-        android:fillColor="#FFFFFF" />
-    
-    <!-- Syringe Rod -->
-    <line
-        android:startX="35"
-        android:startY="34"
-        android:endX="35"
-        android:endY="70"
-        android:stroke="#D32F2F"
-        android:strokeWidth="2" />
-    
-    <!-- Needle -->
+
+    <!-- Background circle -->
     <path
-        android:fillColor="#FFB4C7"
-        android:pathData="M 38,70 L 42,78 L 38,78 Z" />
-    
-    <!-- Needle shaft -->
-    <line
-        android:startX="40"
-        android:startY="70"
-        android:endX="40"
-        android:endY="78"
-        android:stroke="#FFFFFF"
-        android:strokeWidth="1.5" />
-    
-    <!-- Blood Bottle (زجاجة الدم) - Right Side -->
-    <!-- Bottle body -->
+        android:fillColor="#D32F2F"
+        android:pathData="M54,6 a48,48 0 1,0 0,96 a48,48 0 1,0 0,-96z" />
+
+    <!-- Syringe barrel (left) as rectangle via path -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M 62,28 L 62,38 L 58,38 L 58,70 C 58,73.31 60.69,76 64,76 L 76,76 C 79.31,76 82,73.31 82,70 L 82,38 L 78,38 L 78,28 Z" />
-    
-    <!-- Bottle Cap -->
-    <rect
-        android:left="64"
-        android:top="22"
-        android:right="76"
-        android:bottom="28"
-        android:fillColor="#FFFFFF" />
-    
-    <!-- Plus symbol on bottle (علامة زائد) -->
-    <!-- Vertical line of plus -->
-    <line
-        android:startX="70"
-        android:startY="50"
-        android:endX="70"
-        android:endY="62"
-        android:stroke="#D32F2F"
-        android:strokeWidth="2" />
-    
-    <!-- Horizontal line of plus -->
-    <line
-        android:startX="64"
-        android:startY="56"
-        android:endX="76"
-        android:endY="56"
-        android:stroke="#D32F2F"
-        android:strokeWidth="2" />
-    
-    <!-- Blood drip effect -->
-    <circle
-        android:cx="64"
-        android:cy="20"
-        android:r="2.5"
-        android:fillColor="#FFFFFF" />
-    
-    <circle
-        android:cx="76"
-        android:cy="20"
-        android:r="2.5"
-        android:fillColor="#FFFFFF" />
+        android:pathData="M28,35 H42 V70 H28 Z" />
+
+    <!-- Syringe plunger (small circle) via arc path -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,22 a6,6 0 1,0 0,12 a6,6 0 1,0 0,-12z" />
+
+    <!-- Simple bottle body (right) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M58,28 H82 V76 H58 Z" />
+
+    <!-- Bottle cap -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M64,22 H76 V28 H64 Z" />
+
+    <!-- Plus symbol on bottle (red) - vertical -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M69,50 H71 V62 H69 Z" />
+
+    <!-- Plus symbol on bottle (red) - horizontal -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M64,54 H76 V56 H64 Z" />
+
 </vector>
